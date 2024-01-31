@@ -18,3 +18,8 @@ export interface InitialState {
   users: User[];
   error: string;
 }
+
+export interface UpdateUserRequest {
+  userId: number;
+  updateUserData: Partial<User>;
+}

@@ -2,19 +2,20 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { InitialState, User } from "../../type/user";
 import axios from "axios";
 
-const intialState: InitialState = {
+const initialState: InitialState = {
   loading: false,
   users: [],
   error: "",
 };
 
-export const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
-  return axios.get("http://localhost:5000/users").then((res) => res.data);
+export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
+  const response = await axios.get("http://localhost:5000/users");
+  return response.data;
 });
 
 const userSlice = createSlice({
   name: "user",
-  initialState: intialState,
+  initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.pending, (state) => {
